@@ -9,6 +9,7 @@ const app = express();
 let db;
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ extended: true }));
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -22,12 +23,12 @@ app.get('/', (req, res) => {
   });
 });
 
-// curl -d "param1=value1&param2=value2" -X POST https://regimen-server-quauxdvexe.now.sh/
+// curl -d "param1=value1&param2=value2" -X POST https://regimen-server-zeaktioidb.now.sh/
 app.post('/', (req, res) => {
   db.collection('msgs').save(req.body, (err, result) => {
     if (err) return console.log(err);
     console.log('saved to db');
-    res.redirect('/');
+    res.json('success');
   });
 });
 
